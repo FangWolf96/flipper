@@ -46,7 +46,7 @@ New-Item -Path $env:tmp/$FolderName -ItemType Directory
 
 # Enter your access tokens below. At least one has to be provided but both can be used at the same time. 
 
-#$db = "sl.BYJO4AeS4Kke1QV55VZ1DwStjVV6bvkQ0pt-LQKELLO_SQyFTavCc53fxBbdgEbdEP43eDxZShX3jJB9XdgDxOfDyZh964BxmW0d9drIyAqsrirJ77OvxGSEsyjm2XPMzbMiTnM"
+$db = "sl.BYJO4AeS4Kke1QV55VZ1DwStjVV6bvkQ0pt-LQKELLO_SQyFTavCc53fxBbdgEbdEP43eDxZShX3jJB9XdgDxOfDyZh964BxmW0d9drIyAqsrirJ77OvxGSEsyjm2XPMzbMiTnM"
 
 #$dc = ""
 
