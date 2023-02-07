@@ -1,5 +1,3 @@
-﻿#################### Configuration #######################
-
 # URL of the software to download from
 $LOGMEIN_DOWNLOAD_URL = "https://armadyne.systems/logmein.msi"
 
