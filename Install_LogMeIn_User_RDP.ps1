@@ -101,6 +101,3 @@ catch
 }
 
 AddLog "Finished script execution"
-
-############### Restart Workstation
-Restart-Computer
