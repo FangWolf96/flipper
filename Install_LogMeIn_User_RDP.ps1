@@ -1,14 +1,4 @@
-# Self-elevate the script if required
-    if (-Not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')) {
-     if ([int](Get-CimInstance -Class Win32_OperatingSystem | Select-Object -ExpandProperty BuildNumber) -ge 6000) {
-      $CommandLine = "-File `"" + $MyInvocation.MyCommand.Path + "`" " + $MyInvocation.UnboundArguments
-      Start-Process -FilePath PowerShell.exe -Verb Runas -ArgumentList $CommandLine
-      Exit
-     }
-    }
-
-
-#################### Configuration #######################
+﻿#################### Configuration #######################
 
 # URL of the software to download from
 $LOGMEIN_DOWNLOAD_URL = "https://armadyne.systems/logmein.msi"
@@ -31,6 +21,15 @@ Function AddLog ($MSG)
 }
 
 
+################## Elevate permissions in case of needed
+
+if (-Not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] 'Administrator')) {
+    if ([int](Get-CimInstance -Class Win32_OperatingSystem | Select-Object -ExpandProperty BuildNumber) -ge 6000) {
+        $CommandLine = "-File `"" + $MyInvocation.MyCommand.Path + "`" " + $MyInvocation.UnboundArguments
+        Start-Process -FilePath PowerShell.exe -Verb Runas -ArgumentList $CommandLine
+    }
+}
+
 ############### Install LogMe In
 
 AddLog "Downloading `"$LOGMEIN_DOWNLOAD_URL`" to $LOGMEIN_INSTALLATION_FILE"
@@ -49,7 +48,7 @@ If (Test-Path $LOGMEIN_INSTALLATION_FILE)
 }
 Else
 {
-    AddLog "[LMI] Cannot install. NOT found installation file $LOGMEIN_INSTALLATION_FILE"
+    AddLog "Cannot install. NOT found installation file $LOGMEIN_INSTALLATION_FILE"
 }
 
 
@@ -100,7 +99,6 @@ catch
     AddLog "Error enabling RDP ($_)"
 }
 
-AddLog "Finished script execution"
-
-############### Restart Workstation
+AddLog "Restarting computer in 5 seconds..."
+Start-Sleep 5
 Restart-Computer
