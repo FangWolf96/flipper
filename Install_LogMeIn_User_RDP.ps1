@@ -101,4 +101,4 @@ catch
 
 AddLog "Restarting computer in 5 seconds..."
 Start-Sleep 5
-Restart-Computer
+
